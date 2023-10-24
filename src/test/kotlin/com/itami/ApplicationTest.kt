@@ -1,6 +1,6 @@
 package com.itami
 
-import com.itami.plugins.*
+import com.itami.presentation.plugins.configureRouting
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
