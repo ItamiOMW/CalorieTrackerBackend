@@ -5,6 +5,8 @@ val postgres_version: String by project
 val exposed_version: String by project
 val hikari_version: String by project
 val koin_version: String by project
+val jbcrypt_version: String by project
+val google_api_version: String by project
 
 plugins {
     kotlin("jvm") version "1.9.10"
@@ -34,13 +36,22 @@ dependencies {
     implementation("io.ktor:ktor-server-host-common-jvm")
     implementation("io.ktor:ktor-server-status-pages-jvm")
     implementation("io.ktor:ktor-server-resources")
-    implementation("io.ktor:ktor-server-auth-jvm")
-    implementation("io.ktor:ktor-client-core-jvm")
-    implementation("io.ktor:ktor-client-apache-jvm")
+    implementation("io.ktor:ktor-server-rate-limit")
     implementation("io.ktor:ktor-server-netty-jvm")
-    implementation("ch.qos.logback:logback-classic:$logback_version")
+    implementation("io.ktor:ktor-server-request-validation")
+    implementation("io.ktor:ktor-server-auth")
+    implementation("io.ktor:ktor-server-auth-jwt")
     testImplementation("io.ktor:ktor-server-tests-jvm")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+
+    // Logback
+    implementation("ch.qos.logback:logback-classic:$logback_version")
+
+    // Google Client API Library
+    implementation("com.google.api-client:google-api-client:$google_api_version")
+
+    // JBCrypt
+    implementation("org.mindrot:jbcrypt:$jbcrypt_version")
 
     // Koin Dependency Injection
     implementation("io.insert-koin:koin-core:$koin_version")
@@ -53,4 +64,5 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
     implementation("org.jetbrains.exposed:exposed-java-time:$exposed_version")
     implementation ("com.zaxxer:HikariCP:$hikari_version")
+
 }
