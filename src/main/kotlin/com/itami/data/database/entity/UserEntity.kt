@@ -22,5 +22,6 @@ class UserEntity(id: EntityID<Int>) : IntEntity(id) {
     var dailyFats by Users.dailyFats
     var dailyCarbs by Users.dailyCarbs
     var dailyCalories by Users.dailyCalories
+    var waterMl by Users.waterMl
     var createdAt by Users.createdAt
 }

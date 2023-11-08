@@ -2,6 +2,15 @@ package com.itami.utils
 
 object Constants {
 
-    const val GOOGLE_OAUTH = "google-oauth"
+    const val MIN_AGE = 7
+    const val MAX_AGE = 130
+
+    const val MIN_WEIGHT_GRAMS = 0
+    const val MAX_WEIGHT_GRAMS = 1_000_000
+
+    const val MIN_HEIGHT_CM = 50
+    const val MAX_HEIGHT_CM = 300
+
+    const val MILLIS_IN_YEAR = 31_536_000_000L
 
 }
