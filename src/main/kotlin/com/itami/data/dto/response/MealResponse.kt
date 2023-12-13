@@ -1,4 +1,4 @@
-package com.itami.data.response
+package com.itami.data.dto.response
 
 import kotlinx.serialization.Serializable
 
@@ -8,5 +8,5 @@ data class MealResponse(
     val name: String,
     val userId: Int,
     val consumedFoods: List<ConsumedFoodResponse>,
-    val createdAt: Long,
+    val createdAt: String,
 )

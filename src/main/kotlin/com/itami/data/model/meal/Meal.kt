@@ -1,5 +1,6 @@
-package com.itami.data.model
+package com.itami.data.model.meal
 
+import com.itami.data.model.user.User
 import java.time.LocalDateTime
 
 data class Meal(

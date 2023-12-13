@@ -1,9 +1,9 @@
 package com.itami.service.auth
 
-import com.itami.data.model.CreateUser
-import com.itami.data.model.User
-import com.itami.data.response.UserWithTokenResponse
-import com.itami.data.response.UserResponse
+import com.itami.data.model.user.CreateUser
+import com.itami.data.model.user.User
+import com.itami.data.dto.response.UserWithTokenResponse
+import com.itami.data.dto.response.UserResponse
 
 interface AuthService {
 

@@ -1,9 +1,9 @@
 package com.itami.data.mapper
 
 import com.itami.data.database.entity.UserEntity
-import com.itami.data.model.User
-import com.itami.data.response.UserResponse
-import com.itami.utils.toLong
+import com.itami.data.model.user.User
+import com.itami.data.dto.response.UserResponse
+import com.itami.utils.DateTimeUtil
 
 
 fun UserEntity.toUser() = User(
@@ -31,7 +31,7 @@ fun User.toUserResponse() = UserResponse(
     name = this.name,
     email = this.email,
     profilePictureUrl = this.profilePictureUrl,
-    createdAt = this.createdAt.toLong(),
+    createdAt = DateTimeUtil.datetimeToString(this.createdAt),
     age = this.age,
     heightCm = this.heightCm,
     weightGrams = this.weightGrams,

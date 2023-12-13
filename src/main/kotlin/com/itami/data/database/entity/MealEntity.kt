@@ -11,6 +11,6 @@ class MealEntity(id: EntityID<Int>) : IntEntity(id) {
 
     var name by Meals.name
     var user by UserEntity referencedOn Meals.userId
-    val consumedFoods by ConsumedFoodsEntity referrersOn ConsumedFoods.mealId
+    val consumedFoods by ConsumedFoodEntity referrersOn ConsumedFoods.mealId
     var createdAt by Meals.createdAt
 }

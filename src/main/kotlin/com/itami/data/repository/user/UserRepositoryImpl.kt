@@ -4,8 +4,8 @@ import com.itami.data.database.DatabaseFactory.dbQuery
 import com.itami.data.database.entity.UserEntity
 import com.itami.data.database.table.Users
 import com.itami.data.mapper.toUser
-import com.itami.data.model.CreateUser
-import com.itami.data.model.User
+import com.itami.data.model.user.CreateUser
+import com.itami.data.model.user.User
 
 class UserRepositoryImpl : UserRepository {
 

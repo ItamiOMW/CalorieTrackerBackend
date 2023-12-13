@@ -1,7 +1,7 @@
 package com.itami.data.repository.user
 
-import com.itami.data.model.CreateUser
-import com.itami.data.model.User
+import com.itami.data.model.user.CreateUser
+import com.itami.data.model.user.User
 
 interface UserRepository {
 

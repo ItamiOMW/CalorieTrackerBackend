@@ -3,7 +3,7 @@ package com.itami.utils
 import com.auth0.jwt.JWT
 import com.auth0.jwt.JWTVerifier
 import com.auth0.jwt.algorithms.Algorithm
-import com.itami.data.model.User
+import com.itami.data.model.user.User
 import java.util.*
 
 object TokenManager {

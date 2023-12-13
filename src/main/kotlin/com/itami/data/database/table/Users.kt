@@ -1,9 +1,9 @@
 package com.itami.data.database.table
 
-import com.itami.data.model.Gender
-import com.itami.data.model.WeightGoal
-import com.itami.data.model.Lifestyle
-import com.itami.utils.currentDateTime
+import com.itami.data.model.user.Gender
+import com.itami.data.model.user.WeightGoal
+import com.itami.data.model.user.Lifestyle
+import com.itami.utils.DateTimeUtil
 import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.javatime.datetime
 
@@ -23,5 +23,5 @@ object Users : IntIdTable(name = "users") {
     val dailyCarbs = integer("daily_carbs")
     val dailyCalories = integer("daily_calories")
     val waterMl = integer("water_ml")
-    val createdAt = datetime("created_at").default(currentDateTime())
+    val createdAt = datetime("created_at").default(DateTimeUtil.currentDateTime())
 }

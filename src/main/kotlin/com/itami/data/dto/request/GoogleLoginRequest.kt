@@ -1,4 +1,4 @@
-package com.itami.data.request
+package com.itami.data.dto.request
 
 import kotlinx.serialization.Serializable
 
