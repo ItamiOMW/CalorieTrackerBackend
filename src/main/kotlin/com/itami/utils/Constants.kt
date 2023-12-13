@@ -2,6 +2,10 @@ package com.itami.utils
 
 object Constants {
 
+    const val UNKNOWN_ID = -1
+
+    const val DEFAULT_PAGE_SIZE = 20
+
     const val MIN_AGE = 7
     const val MAX_AGE = 130
 

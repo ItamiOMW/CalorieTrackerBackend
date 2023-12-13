@@ -1,17 +1,14 @@
-package com.itami.data.response
+package com.itami.data.model.user
 
-import com.itami.data.model.Gender
-import com.itami.data.model.Lifestyle
-import com.itami.data.model.WeightGoal
-import kotlinx.serialization.Serializable
+import java.time.LocalDateTime
 
-@Serializable
-data class UserResponse(
+data class User(
     val id: Int,
+    val googleId: String?,
     val email: String,
     val name: String,
     val profilePictureUrl: String?,
-    val createdAt: Long,
+    val createdAt: LocalDateTime,
     val age: Int,
     val heightCm: Int,
     val weightGrams: Int,

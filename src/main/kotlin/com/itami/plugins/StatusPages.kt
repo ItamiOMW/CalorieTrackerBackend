@@ -1,6 +1,6 @@
 package com.itami.plugins
 
-import com.itami.data.response.ErrorResponse
+import com.itami.data.dto.response.ErrorResponse
 import com.itami.utils.AppException
 import io.ktor.http.*
 import io.ktor.server.application.*

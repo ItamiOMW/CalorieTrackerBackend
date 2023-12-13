@@ -21,6 +21,7 @@ object DatabaseFactory {
                 Meals,
                 Foods,
                 ConsumedFoods,
+                ConsumedWaters,
                 Recipes
             )
         }

@@ -1,8 +1,8 @@
-package com.itami.data.request
+package com.itami.data.dto.request
 
-import com.itami.data.model.Gender
-import com.itami.data.model.Lifestyle
-import com.itami.data.model.WeightGoal
+import com.itami.data.model.user.Gender
+import com.itami.data.model.user.Lifestyle
+import com.itami.data.model.user.WeightGoal
 import kotlinx.serialization.Serializable
 
 @Serializable

@@ -1,4 +1,4 @@
-package com.itami.data.model
+package com.itami.data.model.meal
 
 data class Food(
     val id: Int,

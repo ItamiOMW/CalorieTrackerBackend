@@ -1,8 +1,8 @@
 package com.itami.plugins
 
 import com.itami.utils.AppException
-import com.itami.data.request.GoogleLoginRequest
-import com.itami.data.request.GoogleRegisterRequest
+import com.itami.data.dto.request.GoogleLoginRequest
+import com.itami.data.dto.request.GoogleRegisterRequest
 import com.itami.utils.Constants
 import io.ktor.server.application.*
 import io.ktor.server.plugins.requestvalidation.*
