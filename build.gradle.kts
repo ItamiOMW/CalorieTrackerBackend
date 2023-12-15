@@ -24,6 +24,12 @@ application {
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
 }
 
+ktor {
+    fatJar {
+        archiveFileName.set("ktor-calorie-tracker.jar")
+    }
+}
+
 repositories {
     mavenCentral()
 }
