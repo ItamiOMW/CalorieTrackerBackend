@@ -3,9 +3,11 @@ package com.itami.plugins
 import com.itami.routes.auth.auth
 import com.itami.routes.food.food
 import com.itami.routes.meal.meal
+import com.itami.routes.recipe.recipes
 import com.itami.service.auth.AuthService
 import com.itami.service.food.FoodService
 import com.itami.service.meal.MealService
+import com.itami.service.recipe.RecipeService
 import io.ktor.server.application.*
 import io.ktor.server.plugins.ratelimit.*
 import io.ktor.server.response.*
@@ -16,6 +18,7 @@ fun Application.configureRouting() {
     val authService: AuthService by inject()
     val mealService: MealService by inject()
     val foodService: FoodService by inject()
+    val recipeService: RecipeService by inject()
 
     routing {
         get("/") {
@@ -27,6 +30,7 @@ fun Application.configureRouting() {
         rateLimit(configuration = APP_RATE_LIMIT) {
             meal(mealService = mealService)
             food(foodService = foodService)
+            recipes(recipeService = recipeService)
         }
     }
 }

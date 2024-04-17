@@ -4,11 +4,11 @@ import org.jetbrains.exposed.dao.id.IntIdTable
 
 object Recipes: IntIdTable("recipes") {
     val name = varchar("name", 100)
-    val cookingText = varchar("cooking_text", 1024)
-    val cookingTimeMin = integer("cooking_time_min")
-    val calories = integer("calories")
-    val proteins = integer("proteins")
-    val fats = integer("fats")
-    val carbs = integer("carbs")
-    val foodPictureUrl = varchar("food_picture_url", 255).nullable()
+    val recipeText = largeText("recipe_text")
+    val timeMinutes = integer("time_minutes")
+    val caloriesPerServing = integer("calories_per_serving")
+    val proteinsPerServing = integer("proteins_per_serving")
+    val fatsPerServing = integer("fats_per_serving")
+    val carbsPerServing = integer("carbs_per_serving")
+    val imageUrl = varchar("image_url", 512)
 }
