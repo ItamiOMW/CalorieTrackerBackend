@@ -9,11 +9,11 @@ class RecipeEntity(id: EntityID<Int>) : IntEntity(id) {
     companion object : IntEntityClass<RecipeEntity>(Recipes)
 
     var name by Recipes.name
-    var cookingText by Recipes.cookingText
-    var cookingTimeMin by Recipes.cookingTimeMin
-    var calories by Recipes.calories
-    var proteins by Recipes.proteins
-    var fats by Recipes.fats
-    var carbs by Recipes.carbs
-    var foodPictureUrl by Recipes.foodPictureUrl
+    var recipeText by Recipes.recipeText
+    var caloriesPerServing by Recipes.caloriesPerServing
+    var proteinsPerServing by Recipes.proteinsPerServing
+    var fatsPerServing by Recipes.fatsPerServing
+    var carbsPerServing by Recipes.carbsPerServing
+    var timeMinutes by Recipes.timeMinutes
+    var imageUrl by Recipes.imageUrl
 }
