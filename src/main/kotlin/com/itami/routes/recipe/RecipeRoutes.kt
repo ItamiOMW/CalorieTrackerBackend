@@ -23,7 +23,19 @@ fun Route.recipes(
             val query = queryParams["query"] ?: ""
             val page = queryParams["page"]?.toIntOrNull() ?: 1
             val pageSize = queryParams["pageSize"]?.toIntOrNull() ?: Constants.DEFAULT_PAGE_SIZE
-            val recipes = recipeService.getRecipesByQuery(query = query, page = page, pageSize = pageSize)
+            val caloriesFrom = queryParams["caloriesFrom"]?.toIntOrNull() ?: 0
+            val caloriesTo = queryParams["caloriesTo"]?.toIntOrNull() ?: Constants.MAX_CALORIES_PER_SERVING
+            val timeMinFrom = queryParams["timeFrom"]?.toIntOrNull() ?: 0
+            val timeMinTo = queryParams["timeTo"]?.toIntOrNull() ?: Constants.MAX_TIME_COOKING_MIN
+            val recipes = recipeService.getRecipesByQuery(
+                query = query,
+                page = page,
+                pageSize = pageSize,
+                caloriesFrom = caloriesFrom,
+                caloriesTo = caloriesTo,
+                timeMinFrom = timeMinFrom,
+                timeMinTo = timeMinTo
+            )
             call.respond(status = HttpStatusCode.OK, message = recipes)
         }
         get(RECIPE_BY_ID) {

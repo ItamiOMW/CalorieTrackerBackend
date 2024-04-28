@@ -9,11 +9,23 @@ class RecipeServiceImpl(
     private val recipeRepository: RecipeRepository
 ) : RecipeService {
 
-    override suspend fun getRecipesByQuery(query: String, page: Int, pageSize: Int): List<RecipeResponse> {
+    override suspend fun getRecipesByQuery(
+        query: String,
+        page: Int,
+        pageSize: Int,
+        caloriesFrom: Int,
+        caloriesTo: Int,
+        timeMinFrom: Int,
+        timeMinTo: Int,
+    ): List<RecipeResponse> {
         return recipeRepository.getRecipeByQuery(
             query = query,
             page = page,
-            pageSize = pageSize
+            pageSize = pageSize,
+            caloriesPerServingFrom = caloriesFrom,
+            caloriesPerServingTo = caloriesTo,
+            timeCookingFromMin = timeMinFrom,
+            timeCookingToMin = timeMinTo
         ).map { it.toRecipeResponse() }
     }
 
