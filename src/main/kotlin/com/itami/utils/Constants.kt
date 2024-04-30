@@ -16,8 +16,4 @@ object Constants {
     const val MAX_HEIGHT_CM = 300
 
     const val MILLIS_IN_YEAR = 31_536_000_000L
-
-    const val MAX_CALORIES_PER_SERVING = 10_000
-    const val MAX_TIME_COOKING_MIN = 10_000
-
 }

@@ -1,6 +1,8 @@
 package com.itami.service.recipe
 
 import com.itami.data.dto.response.RecipeResponse
+import com.itami.data.model.recipe.CaloriesFilter
+import com.itami.data.model.recipe.TimeFilter
 
 interface RecipeService {
 
@@ -8,10 +10,8 @@ interface RecipeService {
         query: String,
         page: Int,
         pageSize: Int,
-        caloriesFrom: Int,
-        caloriesTo: Int,
-        timeMinFrom: Int,
-        timeMinTo: Int,
+        timeFilters: List<TimeFilter>?,
+        caloriesFilters: List<CaloriesFilter>?,
     ): List<RecipeResponse>
 
     suspend fun getRecipeById(recipeId: Int): RecipeResponse
