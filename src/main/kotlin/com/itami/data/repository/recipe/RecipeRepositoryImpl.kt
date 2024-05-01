@@ -23,7 +23,7 @@ class RecipeRepositoryImpl : RecipeRepository {
                 val caloriesCondition = Op.build {
                     if (!caloriesFilters.isNullOrEmpty()) {
                         caloriesFilters.map { range ->
-                            when(range) {
+                            when (range) {
                                 CaloriesFilter.LessThan100Cal -> (Recipes.caloriesPerServing greaterEq 0) and (Recipes.caloriesPerServing lessEq 100)
                                 CaloriesFilter.Between100And250Cal -> (Recipes.caloriesPerServing greaterEq 100) and (Recipes.caloriesPerServing lessEq 250)
                                 CaloriesFilter.Between250And500Cal -> (Recipes.caloriesPerServing greaterEq 250) and (Recipes.caloriesPerServing lessEq 500)
@@ -37,7 +37,7 @@ class RecipeRepositoryImpl : RecipeRepository {
                 val timeCondition = Op.build {
                     if (!timeFilters.isNullOrEmpty()) {
                         timeFilters.map { range ->
-                            when(range) {
+                            when (range) {
                                 TimeFilter.LessThan15Min -> (Recipes.timeMinutes greaterEq 0) and (Recipes.timeMinutes lessEq 15)
                                 TimeFilter.Between15And30Min -> (Recipes.timeMinutes greaterEq 15) and (Recipes.timeMinutes lessEq 30)
                                 TimeFilter.Between30And60Min -> (Recipes.timeMinutes greaterEq 30) and (Recipes.timeMinutes lessEq 60)
@@ -48,10 +48,14 @@ class RecipeRepositoryImpl : RecipeRepository {
                         Op.TRUE
                     }
                 }
-                caloriesCondition and timeCondition
-            }.map {
-                it.toRecipe()
-            }
+                val nameMatchCondition = Op.build {
+                    Recipes.name
+                        .trim()
+                        .lowerCase()
+                        .like("%$query%")
+                }
+                caloriesCondition and timeCondition and nameMatchCondition
+            }.limit(n = pageSize, offset = ((page - 1) * pageSize).toLong()).map { it.toRecipe() }
         }
     }
 
