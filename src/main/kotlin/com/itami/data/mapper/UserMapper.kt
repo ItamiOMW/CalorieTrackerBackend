@@ -3,6 +3,7 @@ package com.itami.data.mapper
 import com.itami.data.database.entity.UserEntity
 import com.itami.data.model.user.User
 import com.itami.data.dto.response.UserResponse
+import com.itami.utils.Constants
 import com.itami.utils.DateTimeUtil
 
 
@@ -15,7 +16,7 @@ fun UserEntity.toUser() = User(
     createdAt = this.createdAt,
     age = this.age,
     heightCm = this.heightCm,
-    weightGrams = this.weightGrams,
+    weightGrams = this.weights.lastOrNull()?.weightGrams ?: Constants.DEFAULT_WEIGHT_GRAMS,
     gender = this.gender,
     weightGoal = this.weightGoal,
     lifestyle = this.lifestyle,

@@ -11,6 +11,7 @@ object Constants {
 
     const val MIN_WEIGHT_GRAMS = 0
     const val MAX_WEIGHT_GRAMS = 1_000_000
+    const val DEFAULT_WEIGHT_GRAMS = 75000
 
     const val MIN_HEIGHT_CM = 50
     const val MAX_HEIGHT_CM = 300
