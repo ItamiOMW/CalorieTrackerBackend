@@ -13,7 +13,6 @@ object Users : IntIdTable(name = "users") {
     val name = varchar("name", 100)
     val profilePictureUrl = varchar("profile_picture_url", 255).nullable()
     val age = integer("age")
-    val weightGrams = integer("weight_grams")
     val heightCm = integer("height_cm")
     val gender = enumerationByName("gender", 20, Gender::class)
     val weightGoal = enumerationByName("weight_goal", 20, WeightGoal::class)

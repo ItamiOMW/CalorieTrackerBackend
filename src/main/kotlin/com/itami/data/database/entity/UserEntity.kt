@@ -1,6 +1,7 @@
 package com.itami.data.database.entity
 
 import com.itami.data.database.table.Users
+import com.itami.data.database.table.Weights
 import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
@@ -13,7 +14,7 @@ class UserEntity(id: EntityID<Int>) : IntEntity(id) {
     var name by Users.name
     var profilePictureUrl by Users.profilePictureUrl
     var age by Users.age
-    var weightGrams by Users.weightGrams
+    val weights by WeightEntity referrersOn Weights.userId
     var heightCm by Users.heightCm
     var gender by Users.gender
     var weightGoal by Users.weightGoal
