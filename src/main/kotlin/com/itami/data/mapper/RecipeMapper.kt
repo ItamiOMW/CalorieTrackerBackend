@@ -1,7 +1,7 @@
 package com.itami.data.mapper
 
-import com.itami.data.database.entity.RecipeEntity
-import com.itami.data.database.table.Recipes
+import com.itami.data.database.exposed.entity.RecipeEntity
+import com.itami.data.database.exposed.table.Recipes
 import com.itami.data.dto.response.RecipeResponse
 import com.itami.data.model.recipe.Recipe
 import org.jetbrains.exposed.sql.ResultRow

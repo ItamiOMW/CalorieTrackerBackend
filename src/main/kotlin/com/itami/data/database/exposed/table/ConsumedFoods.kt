@@ -1,4 +1,4 @@
-package com.itami.data.database.table
+package com.itami.data.database.exposed.table
 
 import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.ReferenceOption

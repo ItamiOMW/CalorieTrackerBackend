@@ -1,8 +1,9 @@
 package com.itami.data.model.user
 
-data class CreateUser(
-    val googleId: String?,
+data class UpdateUser(
     val email: String,
+    val hashPassword: String?,
+    val googleId: String?,
     val name: String,
     val profilePictureUrl: String?,
     val age: Int,
@@ -16,4 +17,5 @@ data class CreateUser(
     val dailyFats: Int,
     val dailyCarbs: Int,
     val waterMl: Int,
+    val isActive: Boolean,
 )

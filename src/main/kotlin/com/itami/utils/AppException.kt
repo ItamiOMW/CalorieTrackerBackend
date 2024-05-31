@@ -8,7 +8,7 @@ sealed class AppException(
 ): Exception() {
 
     data class UnauthorizedException(override val message: String = "Unauthorized.") : AppException(
-        message = "Unauthorized.",
+        message = message,
         httpStatusCode = HttpStatusCode.Unauthorized
     )
 

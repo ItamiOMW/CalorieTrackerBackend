@@ -1,7 +1,7 @@
-package com.itami.data.database.entity
+package com.itami.data.database.exposed.entity
 
-import com.itami.data.database.table.Users
-import com.itami.data.database.table.Weights
+import com.itami.data.database.exposed.table.Users
+import com.itami.data.database.exposed.table.Weights
 import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
@@ -11,6 +11,7 @@ class UserEntity(id: EntityID<Int>) : IntEntity(id) {
 
     var googleId by Users.googleId
     var email by Users.email
+    var hashPassword by Users.hashPassword
     var name by Users.name
     var profilePictureUrl by Users.profilePictureUrl
     var age by Users.age
@@ -25,4 +26,5 @@ class UserEntity(id: EntityID<Int>) : IntEntity(id) {
     var dailyCalories by Users.dailyCalories
     var waterMl by Users.waterMl
     var createdAt by Users.createdAt
+    var isActive by Users.isActive
 }

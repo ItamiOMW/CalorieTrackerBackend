@@ -17,4 +17,6 @@ object Constants {
     const val MAX_HEIGHT_CM = 300
 
     const val MILLIS_IN_YEAR = 31_536_000_000L
+
+    const val FIREBASE_STORAGE_BUCKET = "calorie-tracker-images.appspot.com"
 }
