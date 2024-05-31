@@ -1,8 +1,8 @@
 package com.itami.data.repository.food
 
-import com.itami.data.database.DatabaseFactory.dbQuery
-import com.itami.data.database.entity.FoodEntity
-import com.itami.data.database.table.Foods
+import com.itami.data.database.exposed.DatabaseFactory.dbQuery
+import com.itami.data.database.exposed.entity.FoodEntity
+import com.itami.data.database.exposed.table.Foods
 import com.itami.data.mapper.toFood
 import com.itami.data.model.meal.Food
 import org.jetbrains.exposed.sql.lowerCase

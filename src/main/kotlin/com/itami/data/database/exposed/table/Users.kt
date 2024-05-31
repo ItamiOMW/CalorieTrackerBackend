@@ -1,4 +1,4 @@
-package com.itami.data.database.table
+package com.itami.data.database.exposed.table
 
 import com.itami.data.model.user.Gender
 import com.itami.data.model.user.WeightGoal
@@ -10,6 +10,7 @@ import org.jetbrains.exposed.sql.javatime.datetime
 object Users : IntIdTable(name = "users") {
     val googleId = varchar("google_id", 255).nullable().uniqueIndex()
     val email = varchar("email", 255).uniqueIndex()
+    val hashPassword = varchar("hash_password", 255).nullable()
     val name = varchar("name", 100)
     val profilePictureUrl = varchar("profile_picture_url", 255).nullable()
     val age = integer("age")
@@ -23,4 +24,5 @@ object Users : IntIdTable(name = "users") {
     val dailyCalories = integer("daily_calories")
     val waterMl = integer("water_ml")
     val createdAt = datetime("created_at").default(DateTimeUtil.currentDateTime())
+    val isActive = bool("is_active")
 }

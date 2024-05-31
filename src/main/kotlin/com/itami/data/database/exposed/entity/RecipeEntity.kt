@@ -1,6 +1,6 @@
-package com.itami.data.database.entity
+package com.itami.data.database.exposed.entity
 
-import com.itami.data.database.table.Recipes
+import com.itami.data.database.exposed.table.Recipes
 import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID

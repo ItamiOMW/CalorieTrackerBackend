@@ -1,11 +1,11 @@
 package com.itami.data.repository.meal
 
-import com.itami.data.database.DatabaseFactory.dbQuery
-import com.itami.data.database.entity.ConsumedWaterEntity
-import com.itami.data.database.entity.MealEntity
-import com.itami.data.database.table.ConsumedFoods
-import com.itami.data.database.table.ConsumedWaters
-import com.itami.data.database.table.Meals
+import com.itami.data.database.exposed.DatabaseFactory.dbQuery
+import com.itami.data.database.exposed.entity.ConsumedWaterEntity
+import com.itami.data.database.exposed.entity.MealEntity
+import com.itami.data.database.exposed.table.ConsumedFoods
+import com.itami.data.database.exposed.table.ConsumedWaters
+import com.itami.data.database.exposed.table.Meals
 import com.itami.data.mapper.toConsumedWater
 import com.itami.data.mapper.toMeal
 import com.itami.data.model.meal.*

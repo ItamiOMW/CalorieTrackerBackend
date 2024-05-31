@@ -1,9 +1,9 @@
 package com.itami.data.mapper
 
-import com.itami.data.database.entity.ConsumedFoodEntity
-import com.itami.data.database.entity.ConsumedWaterEntity
-import com.itami.data.database.entity.FoodEntity
-import com.itami.data.database.entity.MealEntity
+import com.itami.data.database.exposed.entity.ConsumedFoodEntity
+import com.itami.data.database.exposed.entity.ConsumedWaterEntity
+import com.itami.data.database.exposed.entity.FoodEntity
+import com.itami.data.database.exposed.entity.MealEntity
 import com.itami.data.dto.request.ConsumedFoodRequest
 import com.itami.data.dto.request.CreateMealRequest
 import com.itami.data.dto.request.UpdateMealRequest

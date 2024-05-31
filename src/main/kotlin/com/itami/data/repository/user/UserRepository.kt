@@ -1,8 +1,6 @@
 package com.itami.data.repository.user
 
-import com.itami.data.model.user.CreateUser
-import com.itami.data.model.user.User
-import com.itami.data.model.user.Weight
+import com.itami.data.model.user.*
 import java.time.LocalDate
 import java.time.LocalDateTime
 
@@ -14,7 +12,23 @@ interface UserRepository {
 
     suspend fun getUserByEmail(email: String): User?
 
-    suspend fun createUser(createUser: CreateUser): User
+    suspend fun createUserEmail(createUserEmail: CreateUserEmail): User
+
+    suspend fun createUserGoogle(createUserGoogle: CreateUserGoogle): User
+
+    suspend fun updateUser(userId: Int, updateUser: UpdateUser): User?
+
+    suspend fun getActivationToken(token: String): ActivationToken?
+
+    suspend fun saveActivationToken(activationToken: ActivationToken): ActivationToken
+
+    suspend fun deleteActivationToken(token: String)
+
+    suspend fun getPasswordResetCode(email: String, code: Int): PasswordResetCode?
+
+    suspend fun savePasswordResetCode(passwordResetCode: PasswordResetCode): PasswordResetCode
+
+    suspend fun deletePasswordResetCode(code: Int, email: String)
 
     suspend fun deleteUser(userId: Int)
 

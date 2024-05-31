@@ -13,7 +13,7 @@ import com.itami.service.report.UserServiceImpl
 import org.koin.dsl.module
 
 val serviceModule = module {
-    single<AuthService> { AuthServiceImpl(get()) }
+    single<AuthService> { AuthServiceImpl(get(), get()) }
     single<MealService> { MealServiceImpl(get()) }
     single<FoodService> { FoodServiceImpl(get()) }
     single<RecipeService> { RecipeServiceImpl(get()) }

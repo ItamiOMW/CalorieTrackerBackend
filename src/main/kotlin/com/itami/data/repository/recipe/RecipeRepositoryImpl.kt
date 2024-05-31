@@ -1,8 +1,8 @@
 package com.itami.data.repository.recipe
 
-import com.itami.data.database.DatabaseFactory.dbQuery
-import com.itami.data.database.entity.RecipeEntity
-import com.itami.data.database.table.Recipes
+import com.itami.data.database.exposed.DatabaseFactory.dbQuery
+import com.itami.data.database.exposed.entity.RecipeEntity
+import com.itami.data.database.exposed.table.Recipes
 import com.itami.data.mapper.toRecipe
 import com.itami.data.model.recipe.CaloriesFilter
 import com.itami.data.model.recipe.Recipe

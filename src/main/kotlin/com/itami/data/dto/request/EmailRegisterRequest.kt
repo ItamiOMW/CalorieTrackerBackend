@@ -1,16 +1,15 @@
-package com.itami.data.model.user
+package com.itami.data.dto.request
 
-import java.time.LocalDateTime
+import com.itami.data.model.user.Gender
+import com.itami.data.model.user.Lifestyle
+import com.itami.data.model.user.WeightGoal
+import kotlinx.serialization.Serializable
 
-data class User(
-    val id: Int,
-    val googleId: String?,
+@Serializable
+data class EmailRegisterRequest(
     val email: String,
-    val hashPassword: String?,
+    val password: String,
     val name: String,
-    val profilePictureUrl: String?,
-    val createdAt: LocalDateTime,
-    val isActive: Boolean,
     val age: Int,
     val heightCm: Int,
     val weightGrams: Int,
@@ -21,5 +20,5 @@ data class User(
     val dailyProteins: Int,
     val dailyFats: Int,
     val dailyCarbs: Int,
-    val waterMl: Int,
+    val waterMl: Int
 )

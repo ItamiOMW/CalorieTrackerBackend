@@ -1,12 +1,17 @@
-package com.itami.data.database
+package com.itami.data.database.exposed
 
-import com.itami.data.database.table.*
+import com.itami.data.database.exposed.table.*
+import com.itami.utils.DateTimeUtil
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import io.ktor.server.config.*
 import kotlinx.coroutines.Dispatchers
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.lessEq
+import org.jetbrains.exposed.sql.and
+import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 import org.jetbrains.exposed.sql.transactions.transaction
 
@@ -14,7 +19,6 @@ object DatabaseFactory {
 
     fun init(appConfig: ApplicationConfig) {
         val database = Database.connect(datasource = hikari(appConfig))
-
         transaction(db = database) {
             SchemaUtils.create(
                 Users,
@@ -23,7 +27,9 @@ object DatabaseFactory {
                 ConsumedFoods,
                 ConsumedWaters,
                 Recipes,
-                Weights
+                Weights,
+                ActivationTokens,
+                PasswordResetCodes
             )
         }
     }
@@ -44,6 +50,22 @@ object DatabaseFactory {
         config.validate()
 
         return HikariDataSource(config)
+    }
+
+    fun cleanupDatabase() {
+        transaction {
+            Users.deleteWhere {
+                (isActive eq false) and (createdAt.lessEq(DateTimeUtil.currentDateTime().minusMinutes(15)))
+            }
+
+            ActivationTokens.deleteWhere {
+                expiresAt.lessEq(DateTimeUtil.currentDateTime())
+            }
+
+            PasswordResetCodes.deleteWhere {
+                expiresAt.lessEq(DateTimeUtil.currentDateTime())
+            }
+        }
     }
 
 }

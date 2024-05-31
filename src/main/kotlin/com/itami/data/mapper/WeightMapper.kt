@@ -1,6 +1,6 @@
 package com.itami.data.mapper
 
-import com.itami.data.database.entity.WeightEntity
+import com.itami.data.database.exposed.entity.WeightEntity
 import com.itami.data.dto.response.WeightResponse
 import com.itami.data.model.user.Weight
 import com.itami.utils.DateTimeUtil

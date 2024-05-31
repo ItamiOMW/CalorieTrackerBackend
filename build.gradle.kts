@@ -7,6 +7,8 @@ val hikari_version: String by project
 val koin_version: String by project
 val jbcrypt_version: String by project
 val google_api_version: String by project
+val apache_version: String by project
+val firebase_admin_version: String by project
 
 plugins {
     kotlin("jvm") version "1.9.10"
@@ -61,6 +63,12 @@ dependencies {
     // Koin Dependency Injection
     implementation("io.insert-koin:koin-core:$koin_version")
     implementation("io.insert-koin:koin-ktor:$koin_version")
+
+    // For sending emails
+    implementation("org.apache.commons:commons-email:$apache_version")
+
+    // Firebase
+    implementation("com.google.firebase:firebase-admin:$firebase_admin_version")
 
     // Database
     implementation("org.postgresql:postgresql:$postgres_version")
