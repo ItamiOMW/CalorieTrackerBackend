@@ -113,12 +113,19 @@ class AuthServiceImpl(
     override suspend fun loginGoogle(googleLoginRequest: GoogleLoginRequest): UserWithTokenResponse {
         val idToken = verifyGoogleIdToken(googleLoginRequest.googleIdToken)
             ?: throw AppException.BadRequestException("Invalid google id token.")
+        val googleId = idToken.payload["sub"].toString()
+        val email = idToken.payload["email"].toString()
 
-        val user = getUserByGoogleId(idToken.payload["sub"].toString())
-            ?: throw AppException.UnauthorizedException("User with this google account does not exist.")
+        val user = userRepository.getUserByEmail(email)
+            ?: throw AppException.NotFoundException("User with this email does not exist.")
 
         if (!user.isActive) {
             throw AppException.ForbiddenException("Account is not activated.")
+        }
+
+        if (user.googleId == null) {
+            val updateUser = user.copy(googleId = googleId).toUpdateUser()
+            userRepository.updateUser(userId = user.id, updateUser)
         }
 
         val token = TokenManager.generateAuthToken(user)
