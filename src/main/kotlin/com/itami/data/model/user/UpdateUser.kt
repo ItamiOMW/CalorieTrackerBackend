@@ -8,7 +8,6 @@ data class UpdateUser(
     val profilePictureUrl: String?,
     val age: Int,
     val heightCm: Int,
-    val weightGrams: Int,
     val lifestyle: Lifestyle,
     val gender: Gender,
     val weightGoal: WeightGoal,

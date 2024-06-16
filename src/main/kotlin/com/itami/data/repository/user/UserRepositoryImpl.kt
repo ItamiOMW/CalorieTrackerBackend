@@ -96,7 +96,7 @@ class UserRepositoryImpl : UserRepository {
         return getUserById(userId) ?: throw Exception()
     }
 
-    override suspend fun updateUser(userId: Int, updateUser: UpdateUser): User? {
+    override suspend fun updateUser(userId: Int, updateUser: UpdateUser): User {
         return dbQuery {
             UserEntity.findById(userId)?.apply {
                 this.googleId = updateUser.googleId
@@ -115,7 +115,7 @@ class UserRepositoryImpl : UserRepository {
                 this.dailyCarbs = updateUser.dailyCarbs
                 this.waterMl = updateUser.waterMl
                 this.isActive = updateUser.isActive
-            }?.toUser()
+            }?.toUser() ?: throw Exception()
         }
     }
 
