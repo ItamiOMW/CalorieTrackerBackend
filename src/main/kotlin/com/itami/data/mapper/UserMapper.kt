@@ -3,11 +3,11 @@ package com.itami.data.mapper
 import com.itami.data.database.exposed.entity.UserEntity
 import com.itami.data.dto.request.EmailRegisterRequest
 import com.itami.data.dto.request.GoogleRegisterRequest
-import com.itami.data.model.user.User
 import com.itami.data.dto.response.UserResponse
 import com.itami.data.model.user.CreateUserEmail
 import com.itami.data.model.user.CreateUserGoogle
 import com.itami.data.model.user.UpdateUser
+import com.itami.data.model.user.User
 import com.itami.utils.Constants
 import com.itami.utils.DateTimeUtil
 import com.itami.utils.PasswordUtil
@@ -105,7 +105,6 @@ fun User.toUpdateUser() = UpdateUser(
     hashPassword = this.hashPassword,
     age = this.age,
     heightCm = this.heightCm,
-    weightGrams = this.weightGrams,
     gender = this.gender,
     weightGoal = this.weightGoal,
     lifestyle = this.lifestyle,

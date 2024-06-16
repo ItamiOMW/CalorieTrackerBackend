@@ -9,7 +9,7 @@ import com.itami.service.auth.AuthService
 import com.itami.service.food.FoodService
 import com.itami.service.meal.MealService
 import com.itami.service.recipe.RecipeService
-import com.itami.service.report.UserService
+import com.itami.service.user.UserService
 import io.ktor.server.application.*
 import io.ktor.server.plugins.ratelimit.*
 import io.ktor.server.response.*

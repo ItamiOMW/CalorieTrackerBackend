@@ -8,8 +8,8 @@ import com.itami.service.meal.MealService
 import com.itami.service.meal.MealServiceImpl
 import com.itami.service.recipe.RecipeService
 import com.itami.service.recipe.RecipeServiceImpl
-import com.itami.service.report.UserService
-import com.itami.service.report.UserServiceImpl
+import com.itami.service.user.UserService
+import com.itami.service.user.UserServiceImpl
 import org.koin.dsl.module
 
 val serviceModule = module {
@@ -17,5 +17,5 @@ val serviceModule = module {
     single<MealService> { MealServiceImpl(get()) }
     single<FoodService> { FoodServiceImpl(get()) }
     single<RecipeService> { RecipeServiceImpl(get()) }
-    single<UserService> { UserServiceImpl(get()) }
+    single<UserService> { UserServiceImpl(get(), get()) }
 }

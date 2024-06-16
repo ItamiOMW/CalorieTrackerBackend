@@ -16,7 +16,7 @@ interface UserRepository {
 
     suspend fun createUserGoogle(createUserGoogle: CreateUserGoogle): User
 
-    suspend fun updateUser(userId: Int, updateUser: UpdateUser): User?
+    suspend fun updateUser(userId: Int, updateUser: UpdateUser): User
 
     suspend fun getActivationToken(token: String): ActivationToken?
 
