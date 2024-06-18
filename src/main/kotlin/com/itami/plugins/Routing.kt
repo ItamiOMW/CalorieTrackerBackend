@@ -1,11 +1,13 @@
 package com.itami.plugins
 
 import com.itami.routes.auth.auth
+import com.itami.routes.feedback.feedback
 import com.itami.routes.food.food
 import com.itami.routes.meal.meal
 import com.itami.routes.recipe.recipes
 import com.itami.routes.user.user
 import com.itami.service.auth.AuthService
+import com.itami.service.feedback.FeedbackService
 import com.itami.service.food.FoodService
 import com.itami.service.meal.MealService
 import com.itami.service.recipe.RecipeService
@@ -22,6 +24,7 @@ fun Application.configureRouting() {
     val foodService: FoodService by inject()
     val recipeService: RecipeService by inject()
     val userService: UserService by inject()
+    val feedbackService: FeedbackService by inject()
 
     routing {
         get("/") {
@@ -30,7 +33,10 @@ fun Application.configureRouting() {
         rateLimit(configuration = AUTH_RATE_LIMIT) {
             auth(authService = authService)
         }
-        rateLimit(configuration = APP_RATE_LIMIT) {
+        rateLimit(configuration = FEEDBACK_RATE_LIMIT) {
+            feedback(feedbackService = feedbackService)
+        }
+        rateLimit(configuration = DEFAULT_RATE_LIMIT) {
             meal(mealService = mealService)
             food(foodService = foodService)
             recipes(recipeService = recipeService)
