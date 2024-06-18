@@ -2,6 +2,8 @@ package com.itami.di
 
 import com.itami.service.auth.AuthService
 import com.itami.service.auth.AuthServiceImpl
+import com.itami.service.feedback.FeedbackService
+import com.itami.service.feedback.FeedbackServiceImpl
 import com.itami.service.food.FoodService
 import com.itami.service.food.FoodServiceImpl
 import com.itami.service.meal.MealService
@@ -18,4 +20,5 @@ val serviceModule = module {
     single<FoodService> { FoodServiceImpl(get()) }
     single<RecipeService> { RecipeServiceImpl(get()) }
     single<UserService> { UserServiceImpl(get(), get()) }
+    single<FeedbackService> { FeedbackServiceImpl(get()) }
 }

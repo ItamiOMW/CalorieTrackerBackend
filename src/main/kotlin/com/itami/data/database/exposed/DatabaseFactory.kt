@@ -29,7 +29,8 @@ object DatabaseFactory {
                 Recipes,
                 Weights,
                 ActivationTokens,
-                PasswordResetCodes
+                PasswordResetCodes,
+                Feedbacks
             )
         }
     }
