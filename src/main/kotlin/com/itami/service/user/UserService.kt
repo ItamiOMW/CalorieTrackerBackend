@@ -15,6 +15,8 @@ interface UserService {
         profilePictureByteArray: ByteArray? = null
     ): UserResponse
 
+    suspend fun deleteUser(userId: Int)
+
     suspend fun getWeights(userId: Int): List<WeightResponse>
 
     suspend fun addWeight(userId: Int, addWeightRequest: AddWeightRequest): WeightResponse

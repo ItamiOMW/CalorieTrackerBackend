@@ -64,6 +64,11 @@ fun Route.user(
                 call.respond(status = HttpStatusCode.OK, message = userResponse)
             } ?: throw AppException.BadRequestException()
         }
+        delete(USER) {
+            val userId = context.userId()
+            userService.deleteUser(userId)
+            call.respond(status = HttpStatusCode.OK, message = "Account has been deleted.")
+        }
         get(USER_WEIGHTS) {
             val userId = context.userId()
             val weights = userService.getWeights(userId = userId)

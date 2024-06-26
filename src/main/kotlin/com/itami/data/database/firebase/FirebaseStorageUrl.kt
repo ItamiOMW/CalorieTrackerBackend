@@ -16,4 +16,10 @@ object FirebaseStorageUrl {
             return@run "https://firebasestorage.googleapis.com/v0/b/${Constants.FIREBASE_STORAGE_BUCKET}/o/$this$fileName?alt=media"
         }
     }
+
+    fun extractFileNameFromUrl(url: String): String {
+        val regex = """.*/o/(.*?)\?alt=media""".toRegex()
+        val matchResult = regex.find(url)
+        return matchResult?.groupValues?.get(1)?.replace("%2F", "/") ?: throw IllegalArgumentException("Invalid URL")
+    }
 }
