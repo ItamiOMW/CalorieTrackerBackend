@@ -32,7 +32,13 @@ class UserServiceImpl(
             ?: throw AppException.UnauthorizedException("User does not exist.")
 
         if (userById.profilePictureUrl != null && profilePictureByteArray != null) {
-            bucket.storage.delete(userById.profilePictureUrl)
+            try {
+                val fileName = FirebaseStorageUrl.extractFileNameFromUrl(userById.profilePictureUrl)
+                val blob = bucket.get(fileName)
+                blob.delete()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
 
         val profilePictureUrl = if (profilePictureName != null && profilePictureByteArray != null) {
@@ -67,6 +73,23 @@ class UserServiceImpl(
 
         val updatedUser = userRepository.updateUser(userId = userId, updateUser)
         return updatedUser.toUserResponse()
+    }
+
+    override suspend fun deleteUser(userId: Int) {
+        val userById = userRepository.getUserById(userId)
+            ?: throw AppException.UnauthorizedException("User does not exist.")
+
+        if (userById.profilePictureUrl != null) {
+            try {
+                val fileName = FirebaseStorageUrl.extractFileNameFromUrl(userById.profilePictureUrl)
+                val blob = bucket.get(fileName)
+                blob.delete()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        userRepository.deleteUser(userId)
     }
 
     override suspend fun getWeights(userId: Int): List<WeightResponse> {
