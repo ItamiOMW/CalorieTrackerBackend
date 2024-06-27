@@ -1,6 +1,7 @@
 package com.itami.service.user
 
 import com.itami.data.dto.request.AddWeightRequest
+import com.itami.data.dto.request.ChangePasswordRequest
 import com.itami.data.dto.request.EditWeightRequest
 import com.itami.data.dto.request.UpdateUserRequest
 import com.itami.data.dto.response.UserResponse
@@ -16,6 +17,8 @@ interface UserService {
     ): UserResponse
 
     suspend fun deleteUser(userId: Int)
+
+    suspend fun changePassword(userId: Int, changePasswordRequest: ChangePasswordRequest)
 
     suspend fun getWeights(userId: Int): List<WeightResponse>
 

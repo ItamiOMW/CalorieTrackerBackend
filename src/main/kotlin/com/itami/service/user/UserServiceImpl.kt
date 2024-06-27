@@ -5,6 +5,7 @@ import com.itami.data.database.firebase.FirebaseStorageUrl
 import com.itami.data.database.firebase.FirebaseStorageUrl.getDownloadUrl
 import com.itami.data.database.firebase.FirebaseStorageUrl.reference
 import com.itami.data.dto.request.AddWeightRequest
+import com.itami.data.dto.request.ChangePasswordRequest
 import com.itami.data.dto.request.EditWeightRequest
 import com.itami.data.dto.request.UpdateUserRequest
 import com.itami.data.dto.response.UserResponse
@@ -15,6 +16,7 @@ import com.itami.data.mapper.toWeightResponse
 import com.itami.data.repository.user.UserRepository
 import com.itami.utils.AppException
 import com.itami.utils.DateTimeUtil
+import com.itami.utils.PasswordUtil
 import io.ktor.util.*
 
 class UserServiceImpl(
@@ -90,6 +92,24 @@ class UserServiceImpl(
         }
 
         userRepository.deleteUser(userId)
+    }
+
+    override suspend fun changePassword(userId: Int, changePasswordRequest: ChangePasswordRequest) {
+        val userById = userRepository.getUserById(userId)
+            ?: throw AppException.UnauthorizedException("User does not exist.")
+
+        if (userById.hashPassword == null) {
+            throw AppException.ConflictException("Your account does not have a password, try resetting the password through the login screen.")
+        }
+
+        val passwordsMatched = PasswordUtil.checkPassword(changePasswordRequest.oldPassword, userById.hashPassword)
+        if (!passwordsMatched) {
+            throw AppException.UnauthorizedException("Invalid old password")
+        }
+
+        val hashedPassword = PasswordUtil.hashPassword(changePasswordRequest.newPassword)
+        val updateUser = userById.copy(hashPassword = hashedPassword).toUpdateUser()
+        userRepository.updateUser(userId = userId, updateUser = updateUser)
     }
 
     override suspend fun getWeights(userId: Int): List<WeightResponse> {
