@@ -2,6 +2,7 @@ package com.itami.routes.user
 
 import com.itami.API_VERSION
 import com.itami.data.dto.request.AddWeightRequest
+import com.itami.data.dto.request.ChangePasswordRequest
 import com.itami.data.dto.request.EditWeightRequest
 import com.itami.data.dto.request.UpdateUserRequest
 import com.itami.plugins.JWT_AUTH
@@ -19,6 +20,7 @@ import io.ktor.server.routing.*
 import kotlinx.serialization.json.Json
 
 private const val USER = "$API_VERSION/user"
+private const val USER_CHANGE_PASSWORD = "$USER/change-password"
 private const val USER_WEIGHTS = "$USER/weights"
 private const val USER_WEIGHT_ID = "$USER/weights/{weightId}"
 
@@ -73,6 +75,12 @@ fun Route.user(
             val userId = context.userId()
             val weights = userService.getWeights(userId = userId)
             call.respond(status = HttpStatusCode.OK, message = weights)
+        }
+        post(USER_CHANGE_PASSWORD) {
+            val userId = context.userId()
+            val changePasswordRequest = call.receive<ChangePasswordRequest>()
+            userService.changePassword(userId, changePasswordRequest)
+            call.respond(status = HttpStatusCode.OK, message = "Password has been changed.")
         }
         post(USER_WEIGHTS) {
             val userId = context.userId()
