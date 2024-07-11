@@ -15,20 +15,25 @@ class RecipeServiceImpl(
         query: String,
         page: Int,
         pageSize: Int,
+        languageCode: String,
         timeFilters: List<TimeFilter>?,
-        caloriesFilters: List<CaloriesFilter>?,
+        caloriesFilters: List<CaloriesFilter>?
     ): List<RecipeResponse> {
         return recipeRepository.getRecipeByQuery(
             query = query,
             page = page,
             pageSize = pageSize,
+            languageCode = languageCode,
             timeFilters = timeFilters,
             caloriesFilters = caloriesFilters
         ).map { it.toRecipeResponse() }
     }
 
-    override suspend fun getRecipeById(recipeId: Int): RecipeResponse {
-        val recipe = recipeRepository.getRecipeById(recipeId = recipeId) ?: throw AppException.NotFoundException()
+    override suspend fun getRecipeById(recipeId: Int, languageCode: String): RecipeResponse {
+        val recipe = recipeRepository.getRecipeById(
+            recipeId = recipeId,
+            languageCode = languageCode
+        ) ?: throw AppException.NotFoundException()
         return recipe.toRecipeResponse()
     }
 

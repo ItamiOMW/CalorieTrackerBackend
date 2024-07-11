@@ -8,6 +8,7 @@ import com.itami.data.dto.request.UpdateMealRequest
 import com.itami.plugins.JWT_AUTH
 import com.itami.service.meal.MealService
 import com.itami.utils.AppException
+import com.itami.utils.Constants
 import com.itami.utils.userId
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -32,35 +33,57 @@ fun Route.meal(
     authenticate(JWT_AUTH) {
         get(SUMMARY) {
             val userId = call.userId()
+            val languageCode = call.request.headers["Accept-Language"] ?: Constants.DEFAULT_LANGUAGE_CODE
             val encodedDatetime = call.parameters["encoded_datetime"] ?: throw AppException.BadRequestException()
             val datetime = encodedDatetime.decodeBase64String()
-            val mealsWithConsumedWater = mealService.getSummary(userId, datetime)
+            val mealsWithConsumedWater = mealService.getSummary(
+                userId = userId,
+                date = datetime,
+                languageCode = languageCode
+            )
             call.respond(status = HttpStatusCode.OK, message = mealsWithConsumedWater)
         }
         get(MEALS) { _ ->
             val userId = call.userId()
+            val languageCode = call.request.headers["Accept-Language"] ?: Constants.DEFAULT_LANGUAGE_CODE
             val encodedDatetime = call.parameters["encoded_datetime"] ?: throw AppException.BadRequestException()
             val datetime = encodedDatetime.decodeBase64String()
-            val meals = mealService.getMeals(userId = userId, date = datetime)
+            val meals = mealService.getMeals(
+                userId = userId,
+                date = datetime,
+                languageCode = languageCode
+            )
             call.respond(status = HttpStatusCode.OK, message = meals)
         }
         post(MEALS) { _ ->
             val userId = call.userId()
+            val languageCode = call.request.headers["Accept-Language"] ?: Constants.DEFAULT_LANGUAGE_CODE
             val createMealRequest = call.receive<CreateMealRequest>()
-            val meal = mealService.createMeal(userId = userId, createMealRequest = createMealRequest)
+            val meal = mealService.createMeal(
+                userId = userId,
+                createMealRequest = createMealRequest,
+                languageCode = languageCode
+            )
             call.respond(status = HttpStatusCode.Created, message = meal)
         }
         get(MEAL_BY_ID) {
             val userId = call.userId()
+            val languageCode = call.request.headers["Accept-Language"] ?: Constants.DEFAULT_LANGUAGE_CODE
             val mealId = call.parameters["mealId"]?.toIntOrNull() ?: throw AppException.BadRequestException()
-            val meal = mealService.getMealById(userId = userId, mealId = mealId)
+            val meal = mealService.getMealById(userId = userId, mealId = mealId, languageCode = languageCode)
             call.respond(status = HttpStatusCode.OK, message = meal)
         }
         put(MEAL_BY_ID) {
             val userId = call.userId()
             val mealId = call.parameters["mealId"]?.toIntOrNull() ?: throw AppException.BadRequestException()
+            val languageCode = call.request.headers["Accept-Language"] ?: Constants.DEFAULT_LANGUAGE_CODE
             val updateMealRequest = call.receive<UpdateMealRequest>()
-            val meal = mealService.updateMeal(userId = userId, mealId = mealId, updateMealRequest)
+            val meal = mealService.updateMeal(
+                userId = userId,
+                mealId = mealId,
+                updateMealRequest = updateMealRequest,
+                languageCode = languageCode
+            )
             call.respond(status = HttpStatusCode.OK, message = meal)
         }
         delete(MEAL_BY_ID) {

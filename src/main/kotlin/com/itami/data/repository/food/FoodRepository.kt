@@ -4,7 +4,12 @@ import com.itami.data.model.meal.Food
 
 interface FoodRepository {
 
-    suspend fun getFoodByQuery(query: String, page: Int, pageSize: Int): List<Food>
+    suspend fun getFoodByQuery(
+        query: String,
+        page: Int,
+        pageSize: Int,
+        languageCode: String,
+    ): List<Food>
 
     suspend fun getFoodsByIds(ids: List<Int>): List<Food>
 

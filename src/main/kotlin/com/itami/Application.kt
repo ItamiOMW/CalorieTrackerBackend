@@ -5,7 +5,7 @@ import com.itami.data.database.firebase.FirebaseAdmin
 import com.itami.plugins.*
 import io.ktor.server.application.*
 import kotlinx.coroutines.*
-import java.util.TimeZone
+import java.util.*
 import kotlin.time.Duration.Companion.minutes
 
 const val API_VERSION = "/api/v1"

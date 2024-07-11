@@ -23,6 +23,23 @@ fun MealEntity.toMeal() = Meal(
     createdAt = this.createdAt
 )
 
+fun MealEntity.toMeal(languageCode: String) = Meal(
+    id = this.id.value,
+    name = this.name,
+    user = this.user.toUser(),
+    consumedFoods = this.consumedFoods.map { it.toConsumedFood(languageCode) },
+    createdAt = this.createdAt
+)
+
+fun FoodEntity.toFood(languageCode: String) = Food(
+    id = this.id.value,
+    name = this.translations.firstOrNull { it.languageCode == languageCode }?.translatedName ?: this.name,
+    caloriesIn100Grams = this.caloriesIn100Grams,
+    proteinsIn100Grams = this.proteinsIn100Grams,
+    fatsIn100Grams = this.fatsIn100Grams,
+    carbsIn100Grams = this.carbsIn100Grams
+)
+
 fun FoodEntity.toFood() = Food(
     id = this.id.value,
     name = this.name,
@@ -35,6 +52,12 @@ fun FoodEntity.toFood() = Food(
 fun ConsumedFoodEntity.toConsumedFood() = ConsumedFood(
     id = this.id.value,
     food = this.food.toFood(),
+    grams = this.grams
+)
+
+fun ConsumedFoodEntity.toConsumedFood(languageCode: String) = ConsumedFood(
+    id = this.id.value,
+    food = this.food.toFood(languageCode),
     grams = this.grams
 )
 

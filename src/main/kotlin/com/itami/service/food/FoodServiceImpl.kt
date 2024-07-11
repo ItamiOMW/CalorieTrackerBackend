@@ -8,11 +8,17 @@ class FoodServiceImpl(
     private val foodRepository: FoodRepository
 ): FoodService {
 
-    override suspend fun searchFood(query: String, page: Int, pageSize: Int): List<FoodResponse> {
+    override suspend fun searchFood(
+        query: String,
+        page: Int,
+        pageSize: Int,
+        languageCode: String
+    ): List<FoodResponse> {
         return foodRepository.getFoodByQuery(
             query = query,
             page = page,
-            pageSize = pageSize
+            pageSize = pageSize,
+            languageCode = languageCode
         ).map { it.toFoodResponse() }
     }
 

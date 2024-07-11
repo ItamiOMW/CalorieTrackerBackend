@@ -6,6 +6,8 @@ object Constants {
 
     const val DEFAULT_PAGE_SIZE = 20
 
+    const val DEFAULT_LANGUAGE_CODE = "en"
+
     const val MIN_AGE = 7
     const val MAX_AGE = 130
 

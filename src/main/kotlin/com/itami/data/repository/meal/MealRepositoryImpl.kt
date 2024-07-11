@@ -17,19 +17,25 @@ import java.time.LocalDateTime
 
 class MealRepositoryImpl : MealRepository {
 
-    override suspend fun getMealsForUser(userId: Int): List<Meal> {
+    override suspend fun getMealsForUser(userId: Int, languageCode: String): List<Meal> {
         return dbQuery {
             MealEntity.find { Meals.userId eq userId }
                 .orderBy(Meals.createdAt to SortOrder.ASC)
-                .map { it.toMeal() }
+                .map { it.toMeal(languageCode) }
         }
     }
 
-    override suspend fun getMealsByDate(userId: Int, date: LocalDate): List<Meal> {
+    override suspend fun getMealsByDate(userId: Int, date: LocalDate, languageCode: String): List<Meal> {
         return dbQuery {
             MealEntity.find {
                 (Meals.userId eq userId) and (Meals.createdAt.date() eq date)
-            }.map { it.toMeal() }
+            }.map { it.toMeal(languageCode) }
+        }
+    }
+
+    override suspend fun getMealById(mealId: Int, languageCode: String): Meal? {
+        return dbQuery {
+            MealEntity.findById(id = mealId)?.toMeal(languageCode)
         }
     }
 
@@ -39,7 +45,7 @@ class MealRepositoryImpl : MealRepository {
         }
     }
 
-    override suspend fun createMeal(createMeal: CreateMeal): Meal? {
+    override suspend fun createMeal(createMeal: CreateMeal, languageCode: String): Meal? {
         val mealId = dbQuery {
             Meals.insertAndGetId { table ->
                 table[name] = createMeal.name
@@ -48,10 +54,10 @@ class MealRepositoryImpl : MealRepository {
             }.value
         }
         insertConsumedFoods(mealId = mealId, consumedFoods = createMeal.consumedFoods)
-        return getMealById(mealId)
+        return getMealById(mealId, languageCode)
     }
 
-    override suspend fun updateMeal(mealId: Int, updateMeal: UpdateMeal): Meal? {
+    override suspend fun updateMeal(mealId: Int, updateMeal: UpdateMeal, languageCode: String): Meal? {
         dbQuery {
             MealEntity.findById(id = mealId)?.apply {
                 this.name = updateMeal.name
@@ -59,7 +65,7 @@ class MealRepositoryImpl : MealRepository {
             ConsumedFoods.deleteWhere { ConsumedFoods.mealId eq mealId }
         }
         updateConsumedFoods(mealId, updateMeal.consumedFoods)
-        return getMealById(mealId)
+        return getMealById(mealId, languageCode)
     }
 
     override suspend fun deleteMeal(mealId: Int) {

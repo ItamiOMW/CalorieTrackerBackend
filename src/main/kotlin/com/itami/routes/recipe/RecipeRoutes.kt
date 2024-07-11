@@ -21,6 +21,7 @@ fun Route.recipes(
 ) {
     authenticate(JWT_AUTH) {
         get(RECIPES) {
+            val languageCode = call.request.headers["Accept-Language"] ?: Constants.DEFAULT_LANGUAGE_CODE
             val queryParams = call.request.queryParameters
             val query = queryParams["query"] ?: ""
             val page = queryParams["page"]?.toIntOrNull() ?: 1
@@ -31,6 +32,7 @@ fun Route.recipes(
                 query = query,
                 page = page,
                 pageSize = pageSize,
+                languageCode = languageCode,
                 caloriesFilters = caloriesFilters,
                 timeFilters = timeFilters
             )
@@ -38,7 +40,8 @@ fun Route.recipes(
         }
         get(RECIPE_BY_ID) {
             val recipeId = call.parameters["recipeId"]?.toIntOrNull() ?: throw AppException.BadRequestException()
-            val recipe = recipeService.getRecipeById(recipeId = recipeId)
+            val languageCode = call.request.headers["Accept-Language"] ?: Constants.DEFAULT_LANGUAGE_CODE
+            val recipe = recipeService.getRecipeById(recipeId = recipeId, languageCode = languageCode)
             call.respond(status = HttpStatusCode.OK, message = recipe)
         }
     }

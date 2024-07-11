@@ -19,12 +19,15 @@ class MealServiceImpl(
     private val mealRepository: MealRepository
 ) : MealService {
 
-    override suspend fun getSummary(userId: Int, date: String): MealsWithConsumedWaterResponse {
+    override suspend fun getSummary(userId: Int, date: String, languageCode: String): MealsWithConsumedWaterResponse {
         val localDate = DateTimeUtil.stringToDate(date)
+
         val meals = mealRepository.getMealsByDate(
             userId = userId,
-            date = localDate
+            date = localDate,
+            languageCode = languageCode
         ).map { it.toMealResponse() }
+
         val consumedWater = mealRepository.getConsumedWater(
             userId = userId,
             date = localDate
@@ -33,49 +36,73 @@ class MealServiceImpl(
         return MealsWithConsumedWaterResponse(meals = meals, consumedWater = consumedWater)
     }
 
-    override suspend fun getMeal(userId: Int, mealId: Int): MealResponse {
+    override suspend fun getMeal(userId: Int, mealId: Int, languageCode: String): MealResponse {
         val meal = mealRepository.getMealById(mealId = mealId) ?: throw AppException.NotFoundException()
+
         if (meal.user.id != userId) {
             throw AppException.ForbiddenException()
         }
+
         return meal.toMealResponse()
     }
 
-    override suspend fun getMeals(userId: Int, date: String): List<MealResponse> {
-        return mealRepository.getMealsByDate(userId = userId, date = DateTimeUtil.stringToDate(date))
-            .map { it.toMealResponse() }
+    override suspend fun getMeals(userId: Int, date: String, languageCode: String): List<MealResponse> {
+        return mealRepository.getMealsByDate(
+            userId = userId,
+            date = DateTimeUtil.stringToDate(date),
+            languageCode = languageCode
+        ).map { it.toMealResponse() }
     }
 
-    override suspend fun getMealById(userId: Int, mealId: Int): MealResponse {
+    override suspend fun getMealById(userId: Int, mealId: Int, languageCode: String): MealResponse {
         val meal = mealRepository.getMealById(mealId = mealId) ?: throw AppException.NotFoundException()
+
         if (meal.user.id != userId) {
             throw AppException.ForbiddenException()
         }
+
         return meal.toMealResponse()
     }
 
-    override suspend fun createMeal(userId: Int, createMealRequest: CreateMealRequest): MealResponse {
-        return mealRepository.createMeal(createMeal = createMealRequest.toCreateMeal(userId = userId))?.toMealResponse()
-            ?: throw Exception("Unknown error occurred.")
+    override suspend fun createMeal(
+        userId: Int,
+        createMealRequest: CreateMealRequest,
+        languageCode: String
+    ): MealResponse {
+        return mealRepository.createMeal(
+            createMeal = createMealRequest.toCreateMeal(userId = userId),
+            languageCode = languageCode
+        )?.toMealResponse() ?: throw Exception("Unknown error occurred.")
     }
 
-    override suspend fun updateMeal(userId: Int, mealId: Int, updateMealRequest: UpdateMealRequest): MealResponse {
+    override suspend fun updateMeal(
+        userId: Int,
+        mealId: Int,
+        updateMealRequest: UpdateMealRequest,
+        languageCode: String
+    ): MealResponse {
         val meal = mealRepository.getMealById(mealId = mealId) ?: throw AppException.NotFoundException("Meal not found")
+
         if (meal.user.id != userId) {
             throw AppException.ForbiddenException()
         }
+
         val updatedMeal = mealRepository.updateMeal(
             mealId = mealId,
-            updateMeal = updateMealRequest.toUpdateMeal()
+            updateMeal = updateMealRequest.toUpdateMeal(),
+            languageCode = languageCode
         ) ?: throw Exception("Unknown error occurred.")
+
         return updatedMeal.toMealResponse()
     }
 
     override suspend fun deleteMeal(userId: Int, mealId: Int) {
         val meal = mealRepository.getMealById(mealId) ?: throw AppException.NotFoundException("Meal not found")
+
         if (meal.user.id != userId) {
             throw AppException.ForbiddenException()
         }
+
         mealRepository.deleteMeal(mealId = mealId)
     }
 

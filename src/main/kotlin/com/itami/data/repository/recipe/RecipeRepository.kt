@@ -10,10 +10,14 @@ interface RecipeRepository {
         query: String,
         page: Int,
         pageSize: Int,
+        languageCode: String,
         timeFilters: List<TimeFilter>?,
         caloriesFilters: List<CaloriesFilter>?,
     ): List<Recipe>
 
-    suspend fun getRecipeById(recipeId: Int): Recipe?
+    suspend fun getRecipeById(
+        recipeId: Int,
+        languageCode: String,
+    ): Recipe?
 
 }
