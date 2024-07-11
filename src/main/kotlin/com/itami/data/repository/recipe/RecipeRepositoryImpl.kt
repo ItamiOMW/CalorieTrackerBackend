@@ -56,7 +56,8 @@ class RecipeRepositoryImpl : RecipeRepository {
                     }
 
                     val nameMatchCondition = Op.build {
-                        (RecipeTranslations.translatedName like "%$query%") or (Recipes.name like "%$query%")
+                        (RecipeTranslations.translatedName.trim().lowerCase().like("%$query%")) or
+                                (Recipes.name.trim().lowerCase().like("%$query%"))
                     }
 
                     caloriesCondition and timeCondition and nameMatchCondition
