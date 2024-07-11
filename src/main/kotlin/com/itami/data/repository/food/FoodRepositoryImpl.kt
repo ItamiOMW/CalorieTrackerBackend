@@ -16,7 +16,10 @@ class FoodRepositoryImpl : FoodRepository {
                     onColumn = { Foods.id },
                     otherColumn = { FoodTranslations.foodId }
                 ) { FoodTranslations.languageCode eq languageCode }
-                .select { (FoodTranslations.translatedName like "%$query%") or (Foods.name like "%$query%") }
+                .select {
+                    (FoodTranslations.translatedName.trim().lowerCase().like("%$query%")) or
+                            (Foods.name.trim().lowerCase().like("%$query%"))
+                }
                 .limit(n = pageSize, offset = ((page - 1) * pageSize).toLong())
                 .map {
                     Food(
