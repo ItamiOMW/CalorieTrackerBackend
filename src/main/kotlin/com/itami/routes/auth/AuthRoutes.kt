@@ -62,7 +62,7 @@ fun Route.auth(
                 profilePictureName = profilePictureName,
                 profilePictureByteArray = profilePictureByteArray
             )
-            call.respond(status = HttpStatusCode.Created, message = "Registration is successful, confirm email.")
+            call.respond(status = HttpStatusCode.OK, message = "Registration is successful, please confirm the email.")
         } ?: throw AppException.BadRequestException()
     }
     post(EMAIL_LOGIN) {

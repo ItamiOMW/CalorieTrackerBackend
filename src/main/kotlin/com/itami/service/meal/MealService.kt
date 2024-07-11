@@ -10,22 +10,56 @@ import com.itami.data.dto.response.MealsWithConsumedWaterResponse
 
 interface MealService {
 
-    suspend fun getSummary(userId: Int, date: String): MealsWithConsumedWaterResponse
+    suspend fun getSummary(
+        userId: Int,
+        date: String,
+        languageCode: String,
+    ): MealsWithConsumedWaterResponse
 
-    suspend fun getMeal(userId: Int, mealId: Int): MealResponse
+    suspend fun getMeal(
+        userId: Int,
+        mealId: Int,
+        languageCode: String,
+    ): MealResponse
 
-    suspend fun getMeals(userId: Int, date: String): List<MealResponse>
+    suspend fun getMeals(
+        userId: Int,
+        date: String,
+        languageCode: String,
+    ): List<MealResponse>
 
-    suspend fun getMealById(userId: Int, mealId: Int): MealResponse
+    suspend fun getMealById(
+        userId: Int,
+        mealId: Int,
+        languageCode: String,
+    ): MealResponse
 
-    suspend fun createMeal(userId: Int, createMealRequest: CreateMealRequest): MealResponse
+    suspend fun createMeal(
+        userId: Int,
+        createMealRequest: CreateMealRequest,
+        languageCode: String,
+    ): MealResponse
 
-    suspend fun updateMeal(userId: Int, mealId: Int, updateMealRequest: UpdateMealRequest): MealResponse
+    suspend fun updateMeal(
+        userId: Int,
+        mealId: Int,
+        updateMealRequest: UpdateMealRequest,
+        languageCode: String,
+    ): MealResponse
 
-    suspend fun deleteMeal(userId: Int, mealId: Int)
+    suspend fun deleteMeal(
+        userId: Int,
+        mealId: Int
+    )
 
-    suspend fun addConsumedWater(userId: Int, addConsumedWaterRequest: AddConsumedWaterRequest): ConsumedWaterResponse
+    suspend fun addConsumedWater(
+        userId: Int,
+        addConsumedWaterRequest: AddConsumedWaterRequest
+    ): ConsumedWaterResponse
 
-    suspend fun removeConsumedWater(userId: Int, removeConsumedWaterRequest: RemoveConsumedWaterRequest): ConsumedWaterResponse
+    suspend fun removeConsumedWater(
+        userId: Int,
+        removeConsumedWaterRequest: RemoveConsumedWaterRequest
+    ): ConsumedWaterResponse
 
 }

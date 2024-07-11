@@ -24,13 +24,15 @@ object DatabaseFactory {
                 Users,
                 Meals,
                 Foods,
+                FoodTranslations,
                 ConsumedFoods,
                 ConsumedWaters,
                 Recipes,
+                RecipeTranslations,
                 Weights,
                 ActivationTokens,
                 PasswordResetCodes,
-                Feedbacks
+                Feedbacks,
             )
         }
     }

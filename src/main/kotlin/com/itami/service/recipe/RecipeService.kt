@@ -10,10 +10,14 @@ interface RecipeService {
         query: String,
         page: Int,
         pageSize: Int,
+        languageCode: String,
         timeFilters: List<TimeFilter>?,
         caloriesFilters: List<CaloriesFilter>?,
     ): List<RecipeResponse>
 
-    suspend fun getRecipeById(recipeId: Int): RecipeResponse
+    suspend fun getRecipeById(
+        recipeId: Int,
+        languageCode: String,
+    ): RecipeResponse
 
 }

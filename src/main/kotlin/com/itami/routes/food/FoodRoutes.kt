@@ -22,10 +22,12 @@ fun Route.food(
             val query = queryParams["query"] ?: ""
             val page = queryParams["page"]?.toIntOrNull() ?: 1
             val pageSize = queryParams["pageSize"]?.toIntOrNull() ?: Constants.DEFAULT_PAGE_SIZE
+            val languageCode = call.request.headers["Accept-Language"] ?: Constants.DEFAULT_LANGUAGE_CODE
             val foods = foodService.searchFood(
                 query = query,
                 page = page,
-                pageSize = pageSize
+                pageSize = pageSize,
+                languageCode = languageCode
             )
             call.respond(status = HttpStatusCode.OK, message = foods)
         }
